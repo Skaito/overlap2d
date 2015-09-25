@@ -25,9 +25,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.kotcrab.vis.ui.widget.Tooltip;
 import com.kotcrab.vis.ui.widget.VisImageButton;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.uwsoft.editor.Overlap2DFacade;
+import java.util.List;
 
 public class UIToolBox extends VisTable {
 
@@ -42,23 +44,31 @@ public class UIToolBox extends VisTable {
         toolsButtonGroup = new ButtonGroup<>();
     }
 
-    public void createToolButtons(Array<String> toolList) {
+	public void createToolButtons(Array<String> toolList) {
+		createToolButtons(toolList, null);
+	}
+	
+    public void createToolButtons(Array<String> toolList, List<String> toolTitleList) {
         for(int i = 0; i < toolList.size; i++) {
-            addToolButton(toolList.get(i));
+            addToolButton(toolList.get(i), ((toolTitleList != null) ? toolTitleList.get(i) : null));
             row();
             if(i == 1) addSeparator().width(31);
         }
     }
-
-    private void addToolButton(String name) {
-        VisImageButton button = createButton("tool-" + name, name);
+	
+    private void addToolButton(String name, String title) {
+        VisImageButton button = createButton("tool-" + name, name, title);
         buttonMap.put(name, button);
         add(button).width(31).height(31);
     }
 
-    private VisImageButton createButton(String styleName, String toolId) {
+    private VisImageButton createButton(String styleName, String toolId, String title) {
         VisImageButton visImageButton = new VisImageButton(styleName);
         toolsButtonGroup.add(visImageButton);
+		if (title != null) {
+			Tooltip tooltip = new Tooltip(title);
+			tooltip.setTarget(visImageButton);
+		}
         visImageButton.addListener(new ToolboxButtonClickListener(toolId));
         return visImageButton;
     }

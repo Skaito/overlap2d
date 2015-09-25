@@ -23,6 +23,10 @@ import com.puremvc.patterns.mediator.SimpleMediator;
 import com.puremvc.patterns.observer.Notification;
 import com.uwsoft.editor.Overlap2DFacade;
 import com.uwsoft.editor.view.stage.tools.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import static org.apache.commons.lang3.ArrayUtils.toArray;
 
 /**
  * Created by sargis on 4/9/15.
@@ -50,18 +54,21 @@ public class UIToolBoxMediator extends SimpleMediator<UIToolBox> {
         toolList = getToolNameList();
         currentTool = SelectionTool.NAME;
 
-        viewComponent.createToolButtons(toolList);
+        viewComponent.createToolButtons(toolList, new ArrayList(getToolNameMap().values()));
     }
 
-
-    public Array<String> getToolNameList() {
-        Array<String> toolNames = new Array();
-        toolNames.add(SelectionTool.NAME);
-        toolNames.add(TransformTool.NAME);
-        toolNames.add(TextTool.NAME);
-        toolNames.add(PointLightTool.NAME);
-        toolNames.add(ConeLightTool.NAME);
-        toolNames.add(PolygonTool.NAME);
+	public Array<String> getToolNameList() {
+		return Array.with(getToolNameMap().keySet().toArray(new String[0]));
+	}
+	
+    private Map<String, String> getToolNameMap() {
+        Map<String, String> toolNames = new LinkedHashMap<>();
+        toolNames.put(SelectionTool.NAME, SelectionTool.TITLE);
+        toolNames.put(TransformTool.NAME, TransformTool.TITLE);
+        toolNames.put(TextTool.NAME, TextTool.TITLE);
+        toolNames.put(PointLightTool.NAME, PointLightTool.TITLE);
+        toolNames.put(ConeLightTool.NAME, ConeLightTool.TITLE);
+        toolNames.put(PolygonTool.NAME, PolygonTool.TITLE);
         return toolNames;
     }
 
