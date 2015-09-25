@@ -46,6 +46,7 @@ public class SplashStarter {
         config.height = 415;
         config.resizable = false;
         splashFrame = new SplashFrame(splashScreen, config);
+		splashFrame.setIconImage(splashFrame.getToolkit().getImage(this.getClass().getResource("/icon.png")));
         /*
         GraphicsEnvironment ge =
                 GraphicsEnvironment.getLocalGraphicsEnvironment();
