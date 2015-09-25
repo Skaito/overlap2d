@@ -24,6 +24,7 @@ import java.util.HashMap;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
@@ -151,13 +152,16 @@ public class SandboxMediator extends SimpleMediator<Sandbox> {
     private void initItemListeners() {
         Engine engine = getViewComponent().getEngine();
         Family rootFamily = Family.all(ViewPortComponent.class).get();
-        Entity rootEntity = engine.getEntitiesFor(rootFamily).iterator().next();
-        NodeComponent nodeComponent = ComponentRetriever.get(rootEntity, NodeComponent.class);
-        SnapshotArray<Entity> childrenEntities = nodeComponent.children;
+		ImmutableArray<Entity> arr = engine.getEntitiesFor(rootFamily);
+		if (arr.size() > 0) {
+			Entity rootEntity = arr.iterator().next();
+			NodeComponent nodeComponent = ComponentRetriever.get(rootEntity, NodeComponent.class);
+			SnapshotArray<Entity> childrenEntities = nodeComponent.children;
 
-        for (Entity child: childrenEntities) {
-            addListenerToItem(child);
-        }
+			for (Entity child: childrenEntities) {
+				addListenerToItem(child);
+			}
+		}
     }
 
     /**
