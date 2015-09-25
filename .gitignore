@@ -61,3 +61,7 @@ assets/style/uiskin.png
 assets/style/uiskin.atlas
 /runOverlap2d_dev.bat
 /.nb-gradle/
+/overlap2d/assets/style/overlap2d/uiskin.atlas
+/overlap2d/assets/style/overlap2d/uiskin.png
+/overlap2d/assets/splash/overlap2d/splash.png
+/overlap2d/assets/splash/overlap2d/splash.atlas
