@@ -1005,13 +1005,13 @@ public class ProjectManager extends BaseProxy {
         }
 
         try {
-            createEmptyProject(projectName, originWidth, originHeight, pixelPerWorldUnit);
-            openProjectAndLoadAllData(projectName);
             String workSpacePath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
             if (workSpacePath.length() > 0) {
                 setLastOpenedPath(workSpacePath);
                 setWorkspacePath(workSpacePath);
             }
+            createEmptyProject(projectName, originWidth, originHeight, pixelPerWorldUnit);
+            openProjectAndLoadAllData(projectName);
             Sandbox.getInstance().loadCurrentProject();
             facade.sendNotification(PROJECT_OPENED);
 
