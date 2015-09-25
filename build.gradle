@@ -136,6 +136,9 @@ sourceSets {
         java {
             srcDir 'overlap2d/src/'
         }
+		resources {
+			srcDir 'overlap2d/resources'
+		}
     }
     test {
         java {

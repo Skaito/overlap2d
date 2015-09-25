@@ -18,6 +18,7 @@
 
 package com.uwsoft.editor;
 
+import com.badlogic.gdx.Files;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.MouseInfo;
@@ -177,13 +178,7 @@ public class Main {
 
     //THIS IS JUST FOR FUN
     private void setIcon(){
-    	String logoPath = getLocalArtPath("splash_textures");
-        File file = new File(logoPath);
-        if(!file.exists()){
-        	 logoPath = "art/splash_textures/";
-             file = new File(logoPath);
-        }
-        logoPath+="icon.png";
+    	URL logoPath = this.getClass().getResource("/icon.png");
 
     	if(mainFrame != null){
     		mainFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(logoPath));
